@@ -1,0 +1,28 @@
+.navbar{
+    position: fixed;
+    height: 100%;
+    width: 200px;
+    background: #191818;
+    color: #999;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    font-size: 1.25rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.menuItem{
+    padding: 1rem;
+}
+
+.menuItem:hover{
+    color: #fff;
+    cursor: pointer;
+    background-color: #1f8dd6;
+    transition: all 0.2s ease-in-out;
+}
