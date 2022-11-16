@@ -5,6 +5,8 @@
     width: 100%;
     background-color: #191818;
     color: #fff;
+    z-index: 100;
+    position: fixed;
 }
 
 .title {
