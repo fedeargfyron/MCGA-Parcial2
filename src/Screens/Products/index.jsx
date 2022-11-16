@@ -16,7 +16,7 @@ const Products = () => {
 
     let navigate = useNavigate();
     const routeChange = (id) => {
-        let path = `/products/form/${id}`
+        let path = id ? `/products/form/${id}` : '/products/form'
         navigate(path);
     }
 
@@ -32,7 +32,7 @@ const Products = () => {
                 <h2>Manage products</h2>
                 <div className={styles.buttonContainer}>
                     <Button
-                        onClick={routeChange}
+                        onClick={() => routeChange()}
                         background={'#28a745'} 
                         content={"Add product"} 
                         icon={<FontAwesomeIcon icon={faAdd} />}

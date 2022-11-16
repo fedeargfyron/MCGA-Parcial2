@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './productForm.module.css'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Input from '../../Components/SharedComponents/Input'
 import InputContainer from '../../Components/SharedComponents/InputContainer'
 import Button from '../../Components/SharedComponents/Button'
@@ -17,7 +17,6 @@ const ProductForm = () => {
     const { isLoading, product } = useSelector((state) => state.products);
     const id = params.id;
     const { register, setValue, handleSubmit, formState: { errors } } = useForm();
-
     const onSubmit = (e) => {
         let body = {
             "name": e.name,
@@ -48,6 +47,13 @@ const ProductForm = () => {
         setValue("stock", product.stock);
         setValue("category", product.category);
       }, [id, product, setValue]);
+    
+    let navigate = useNavigate();
+    const cancelClick = () => {
+        let path = `/products`
+        navigate(path);
+    }
+
 
     if(isLoading) return <h3>Loading....</h3>;
 
@@ -103,7 +109,8 @@ const ProductForm = () => {
                 type='submit'
                 icon={<FontAwesomeIcon icon={faAdd}/>} 
                 />
-                <Button 
+                <Button
+                onClick={cancelClick}
                 content='Cancel' 
                 background={'#F44336'} 
                 type='button'
