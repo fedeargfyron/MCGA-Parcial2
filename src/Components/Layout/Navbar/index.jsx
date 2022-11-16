@@ -12,9 +12,6 @@ const Navbar = () => {
         <li className={styles.menuItem}>
           <Link to={'/products'}>Products</Link>
         </li>
-        <li className={styles.menuItem}>
-          <Link to={'/'}>Home</Link>
-        </li>
       </ul>
     </div>
   );
