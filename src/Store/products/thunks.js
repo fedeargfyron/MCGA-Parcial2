@@ -72,7 +72,6 @@ export const postProduct = (body) => async (dispatch) => {
 
         dispatch(postProductSuccess(json));
     } catch (error) {
-        console.log(error);
         dispatch(postProductError(error.toString()));
     }
 };
@@ -93,7 +92,6 @@ export const updateProduct = (id, body) => async (dispatch) => {
 
         dispatch(putProductSuccess(json));
     } catch (error) {
-        console.log(error);
         dispatch(putProductError(error.toString()));
     }
 };

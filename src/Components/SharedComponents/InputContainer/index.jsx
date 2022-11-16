@@ -5,7 +5,7 @@ const InputContainer = ({children, label, errors}) => {
     <div className={styles.inputContainer}>
         <label className={styles.inputLabel}>{label}</label>
         {children}
-        {errors && <p className={styles.inputLabel}>Errores!</p>}
+        {errors && <p className={styles.errorLabel}>Errores!</p>}
     </div>
   )
 }

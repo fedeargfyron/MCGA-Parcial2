@@ -11,6 +11,7 @@ import { faAdd, faCancel } from '@fortawesome/free-solid-svg-icons'
 import { getProductById, postProduct, updateProduct } from '../../Store/products/thunks'
 const ProductForm = () => {
 
+    const [formTitle, setFormTitle] = useState("Add product");
     const [editForm, setEditForm] = useState(false);
     const params = useParams();
     const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const ProductForm = () => {
         if(!product || !id) return;
 
         setEditForm(true);
+        setFormTitle("Edit product");
         setValue("name", product.name);
         setValue("description", product.description);
         setValue("price", product.price);
@@ -62,7 +64,7 @@ const ProductForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-            <h2>ProductForm</h2>
+            <h2 className={styles.formTitle}>{formTitle}</h2>
             <InputContainer label={'Name'} errors={errors.name}>
                 <Input
                     register={register}
