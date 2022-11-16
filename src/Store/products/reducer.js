@@ -4,7 +4,10 @@ import {
     SAVE_DATA_ERROR,
     DELETE_PRODUCTS_ERROR,
     DELETE_PRODUCTS_LOADING,
-    DELETE_PRODUCTS_SUCCESS } from './types';
+    DELETE_PRODUCTS_SUCCESS,
+    GET_PRODUCT_BYID_ERROR,
+    GET_PRODUCT_BYID_LOADING,
+    GET_PRODUCT_BYID_SUCCESS } from './types';
 
  const INITIAL_STATE = {
    data: [],
@@ -46,6 +49,24 @@ import {
                 error: false
             };
         case DELETE_PRODUCTS_ERROR:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            };
+        case GET_PRODUCT_BYID_LOADING:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case GET_PRODUCT_BYID_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: false,
+                product: action.payload
+            };
+        case GET_PRODUCT_BYID_ERROR:
             return {
                 ...state,
                 isLoading: false,

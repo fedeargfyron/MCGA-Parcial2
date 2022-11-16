@@ -5,29 +5,43 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Input from '../../Components/SharedComponents/Input'
 import InputContainer from '../../Components/SharedComponents/InputContainer'
+import Button from '../../Components/SharedComponents/Button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAdd, faCancel } from '@fortawesome/free-solid-svg-icons'
+import { getProductById } from '../../Store/products/thunks'
 const ProductForm = () => {
 
-    const [editProduct, setEditProduct] = useState(false);
+    const [editForm, setEditForm] = useState(false);
     const params = useParams();
     const dispatch = useDispatch();
     const { isLoading, product } = useSelector((state) => state.products);
     const id = params.id;
     const { register, setValue, handleSubmit, formState: { errors } } = useForm();
 
-    console.log(errors.name);
+    const onSubmit = (e) => {
+        let body = {
+            "name": e.name,
+            "description": e.description,
+            "price": e.price,
+            "stock": e.stock,
+            "category": e.category
+        };
 
-    const onSubmit = () => {
-        console.log("hola");
+        /*
+        if(editForm) return dispatch(editProduct(id, body));
+
+        dispatch(addProduct(body));
+        */
     }
 
     useEffect(() => {
-        if (id) dispatch(/*getByIdProducts(id)*/);
+        if (id) dispatch(getProductById(id));
     }, [id, dispatch]);
 
     useEffect(() => {
         if(!product || !id) return;
 
-        setEditProduct(true);
+        setEditForm(true);
         setValue("name", product.name);
         setValue("description", product.description);
         setValue("price", product.price);
@@ -82,7 +96,20 @@ const ProductForm = () => {
                     placeholder={'Category'}
                 />
             </InputContainer>
-             <button type='submit'>Submit</button>
+            <div className={styles.buttonContainer}>
+                <Button 
+                content='Add' 
+                background={'#28a745'} 
+                type='submit'
+                icon={<FontAwesomeIcon icon={faAdd}/>} 
+                />
+                <Button 
+                content='Cancel' 
+                background={'#F44336'} 
+                type='button'
+                icon={<FontAwesomeIcon icon={faCancel}/>}
+                 />
+            </div>
         </form>
     )
 }

@@ -15,8 +15,8 @@ const Products = () => {
     }, [dispatch]);
 
     let navigate = useNavigate();
-    const routeChange = () => {
-        let path = '/products/form'
+    const routeChange = (id) => {
+        let path = `/products/form/${id}`
         navigate(path);
     }
 
@@ -64,7 +64,7 @@ const Products = () => {
                                             background={'none'} 
                                             color={'#FFC107'} 
                                             icon={<FontAwesomeIcon icon={faPencil} />}
-                                            onClick={routeChange} />
+                                            onClick={() => routeChange(product._id)} />
                                         <Button 
                                             background={'none'} 
                                             color={'#F44336'} 
