@@ -7,7 +7,13 @@ import {
     DELETE_PRODUCTS_ERROR,
     GET_PRODUCT_BYID_ERROR,
     GET_PRODUCT_BYID_LOADING,
-    GET_PRODUCT_BYID_SUCCESS } from './types';
+    GET_PRODUCT_BYID_SUCCESS,
+    POST_PRODUCT_ERROR,
+    POST_PRODUCT_LOADING,
+    POST_PRODUCT_SUCCESS,
+    PUT_PRODUCT_ERROR,
+    PUT_PRODUCT_LOADING,
+    PUT_PRODUCT_SUCCESS } from './types';
 
 export const saveData = (data) => {
     return {
@@ -66,6 +72,46 @@ export const getProductByIdSuccess = (data) => {
 export const getProductByIdError = (error) => {
     return {
         type: GET_PRODUCT_BYID_ERROR,
+        payload: error
+    };
+};
+
+export const postProductLoading = () => {
+    return {
+      type: POST_PRODUCT_LOADING
+    };
+};
+
+export const postProductSuccess = (data) => {
+    return {
+        type: POST_PRODUCT_SUCCESS,
+        payload: data
+    };
+};
+
+export const postProductError = (error) => {
+    return {
+        type: POST_PRODUCT_ERROR,
+        payload: error
+    };
+};
+
+export const putProductLoading = () => {
+    return {
+      type: PUT_PRODUCT_LOADING
+    };
+};
+
+export const putProductSuccess = (data) => {
+    return {
+        type: PUT_PRODUCT_SUCCESS,
+        payload: data
+    };
+};
+
+export const putProductError = (error) => {
+    return {
+        type: PUT_PRODUCT_ERROR,
         payload: error
     };
 };

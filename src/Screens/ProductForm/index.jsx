@@ -8,13 +8,13 @@ import InputContainer from '../../Components/SharedComponents/InputContainer'
 import Button from '../../Components/SharedComponents/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAdd, faCancel } from '@fortawesome/free-solid-svg-icons'
-import { getProductById } from '../../Store/products/thunks'
+import { getProductById, postProduct, updateProduct } from '../../Store/products/thunks'
 const ProductForm = () => {
 
     const [editForm, setEditForm] = useState(false);
     const params = useParams();
     const dispatch = useDispatch();
-    const { isLoading, product } = useSelector((state) => state.products);
+    const { isLoading, product, error } = useSelector((state) => state.products);
     const id = params.id;
     const { register, setValue, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (e) => {
@@ -26,11 +26,14 @@ const ProductForm = () => {
             "category": e.category
         };
 
-        /*
-        if(editForm) return dispatch(editProduct(id, body));
+        if(editForm)
+            dispatch(updateProduct(id, body));
+        else
+            dispatch(postProduct(body));
 
-        dispatch(addProduct(body));
-        */
+        if(!isLoading && !error){
+            returnProducts();
+        }
     }
 
     useEffect(() => {
@@ -49,7 +52,7 @@ const ProductForm = () => {
       }, [id, product, setValue]);
     
     let navigate = useNavigate();
-    const cancelClick = () => {
+    const returnProducts = () => {
         let path = `/products`
         navigate(path);
     }
@@ -110,7 +113,7 @@ const ProductForm = () => {
                 icon={<FontAwesomeIcon icon={faAdd}/>} 
                 />
                 <Button
-                onClick={cancelClick}
+                onClick={returnProducts}
                 content='Cancel' 
                 background={'#F44336'} 
                 type='button'

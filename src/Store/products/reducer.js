@@ -7,7 +7,13 @@ import {
     DELETE_PRODUCTS_SUCCESS,
     GET_PRODUCT_BYID_ERROR,
     GET_PRODUCT_BYID_LOADING,
-    GET_PRODUCT_BYID_SUCCESS } from './types';
+    GET_PRODUCT_BYID_SUCCESS,
+    POST_PRODUCT_ERROR,
+    POST_PRODUCT_LOADING,
+    POST_PRODUCT_SUCCESS,
+    PUT_PRODUCT_ERROR,
+    PUT_PRODUCT_LOADING,
+    PUT_PRODUCT_SUCCESS } from './types';
 
  const INITIAL_STATE = {
    data: [],
@@ -67,6 +73,40 @@ import {
                 product: action.payload
             };
         case GET_PRODUCT_BYID_ERROR:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            };
+        case POST_PRODUCT_LOADING:
+        return {
+            ...state,
+            isLoading: true
+        };
+        case POST_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: false
+            };
+        case POST_PRODUCT_ERROR:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            };
+        case PUT_PRODUCT_LOADING:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case PUT_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: false
+            };
+        case PUT_PRODUCT_ERROR:
             return {
                 ...state,
                 isLoading: false,
