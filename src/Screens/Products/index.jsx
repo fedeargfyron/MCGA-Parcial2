@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faAdd, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 const Products = () => {
-    const productsSelector = useSelector((state) => state.products);
+    const { isLoading, data } = useSelector((state) => state.products);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const Products = () => {
         dispatch(deleteProducts(id));
     }
 
-    if (productsSelector.isLoading) return <h3>Loading....</h3>
+    if (isLoading) return <h3>Loading....</h3>
 
     return (
         <div className={styles.table}>
@@ -34,7 +34,7 @@ const Products = () => {
                     <Button
                         onClick={routeChange}
                         background={'#28a745'} 
-                        content={"Agregar"} 
+                        content={"Add product"} 
                         icon={<FontAwesomeIcon icon={faAdd} />}
                     ></Button>
                 </div>
@@ -52,7 +52,7 @@ const Products = () => {
                 </thead>
                 <tbody>
                     {
-                        productsSelector.data.map((product) => 
+                        data.map((product) => 
                             <tr className={styles.tableRow} key={product._id}>
                                     <td>{product._id}</td>
                                     <td>{product.name}</td>
