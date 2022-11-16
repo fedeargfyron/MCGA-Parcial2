@@ -1,4 +1,10 @@
-import { SAVE_DATA_FULLFILLED, SAVE_DATA_LOADING, SAVE_DATA_REJECTED,  DELETE_DATA } from './types';
+import { 
+    SAVE_DATA_SUCCESS, 
+    SAVE_DATA_LOADING, 
+    SAVE_DATA_ERROR,
+    DELETE_PRODUCTS_ERROR,
+    DELETE_PRODUCTS_LOADING,
+    DELETE_PRODUCTS_SUCCESS } from './types';
 
  const INITIAL_STATE = {
    data: [],
@@ -8,32 +14,43 @@ import { SAVE_DATA_FULLFILLED, SAVE_DATA_LOADING, SAVE_DATA_REJECTED,  DELETE_DA
 
  const productsReducer = (state = INITIAL_STATE, action) => {
    switch (action.type) {
-     case SAVE_DATA_FULLFILLED:
-       return {
-         ...state,
-         data: action.payload,
-         isError: false,
-       };
+        case SAVE_DATA_SUCCESS:
+            return {
+                ...state,
+                data: action.payload,
+                isError: false,
+                isLoading: false
+            };
 
-      case SAVE_DATA_LOADING:
-        return {
-          ...state,
-          isLoading: action.payload,
-        }
+        case SAVE_DATA_LOADING:
+            return {
+                ...state,
+                isLoading: action.payload,
+            }
 
-      case SAVE_DATA_REJECTED: 
-        return {
-          ...state,
-          isError: true,
-          isLoading: false
-        }
-
-     case DELETE_DATA:
-       return {
-         ...state,
-         data: state.data.filter((item) => item.id !== action.payload),
-       };
-
+        case SAVE_DATA_ERROR: 
+            return {
+                ...state,
+                isError: true,
+                isLoading: false
+            }
+        case DELETE_PRODUCTS_LOADING:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case DELETE_PRODUCTS_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: false
+            };
+        case DELETE_PRODUCTS_ERROR:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            };
      default:
        return state;
    }
